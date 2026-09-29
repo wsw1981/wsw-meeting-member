@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>約開會小工具 v8.0</title>
+<style>
+:root{font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;color:#193044;background:#f4f7fb;--blue:#2455aa;--line:#dce5ef}*{box-sizing:border-box}button,input,textarea{font:inherit}button{cursor:pointer}body{margin:0}.shell{max-width:1320px;margin:auto;padding:18px 22px 50px}header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}h1{font-size:1.75rem;margin:0}header small{display:block;color:#5f7284;margin-top:3px}.badge{background:#e8efff;color:#2455aa;border-radius:99px;padding:7px 12px;font-weight:700}.tabs{display:flex;gap:8px;border-bottom:1px solid var(--line);margin-bottom:18px}.tabs button{border:0;background:transparent;padding:12px 18px;font-weight:800;color:#587088;border-bottom:3px solid transparent}.tabs button.active{color:var(--blue);border-color:var(--blue)}.panel{display:none}.panel.active{display:block}.card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:0 5px 18px #28415a0b;padding:18px;margin-bottom:16px}.topbar{display:flex;flex-wrap:wrap;align-items:end;gap:12px}.grow{flex:1;min-width:210px}.label{font-size:.87rem;font-weight:800;color:#506477;margin-bottom:7px}.people{display:flex;gap:8px;flex-wrap:wrap}.person{border:2px solid var(--line);background:#fff;color:#233b52;border-radius:12px;padding:10px 13px;min-height:45px;font-weight:700}.person.active{border-color:var(--blue);background:#eef4ff;box-shadow:0 0 0 2px #dbe8ff}.swatch{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--c);margin-right:6px;vertical-align:-1px}.modes{display:flex;gap:7px;flex-wrap:wrap}.mode{border:1px solid var(--line);border-radius:12px;background:#fff;padding:10px 13px;min-height:45px;font-weight:800}.mode.active{background:#173f79;color:#fff;border-color:#173f79}.hint{color:#617588;font-size:.91rem;margin:10px 0 0}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.btn{border:1px solid #cbd9e8;border-radius:10px;background:#fff;color:#1c466f;padding:9px 13px;font-weight:750;min-height:42px}.btn.primary{background:#2455aa;color:#fff;border-color:#2455aa}.btn.danger{color:#a13535}.btn:disabled{opacity:.45;cursor:not-allowed}.summary{display:flex;gap:10px;flex-wrap:wrap}.stat{border-radius:13px;background:#f0f5fb;padding:11px 14px;min-width:120px}.stat strong{display:block;font-size:1.3rem}.stat span{color:#5e7385;font-size:.86rem}.best{line-height:1.7;margin-top:9px;color:#385269}.month h2{font-size:1.28rem;margin:0 0 12px}.calendar-scroll{overflow-x:auto}.calendar{min-width:770px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px}.weekday{text-align:center;color:#65798a;font-weight:800;padding:6px}.day{border:1px solid var(--line);border-radius:13px;background:#fff;min-height:157px;padding:9px;min-width:0}.day.empty{background:#f1f4f8;border:0}.day.out{opacity:.32}.day-head{display:flex;justify-content:space-between;align-items:center;gap:3px;margin-bottom:7px}.date{font-weight:900}.today{color:#2455aa}.day-controls{display:flex;gap:3px}.tiny{border:0;border-radius:7px;background:#edf2f8;color:#435c73;padding:3px 6px;font-size:.75rem;min-height:29px}.slot{width:100%;text-align:left;border:1px solid #dbe5ef;background:#f9fbfe;border-radius:9px;padding:6px;margin:3px 0;min-height:42px;color:#233a50}.slot.mine-yes{background:#eaf8ef;border-color:#87cfa1}.slot.mine-no{background:#fff0f0;border-color:#e2a1a1}.slot b{font-size:.85rem}.slot small{display:block;color:#667d8c;font-size:.73rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dots{display:flex;gap:3px;flex-wrap:wrap;min-height:8px;margin-top:5px}.dot{width:8px;height:8px;border-radius:50%;background:var(--c)}.dot.no{background:transparent;border:2px solid var(--c);width:9px;height:9px}.form-row{display:flex;gap:12px;flex-wrap:wrap}.field{flex:1;min-width:180px}.field label{display:block;font-weight:750;margin-bottom:6px}.field input{width:100%;border:1px solid #bdcddd;border-radius:9px;padding:10px;background:white;min-height:44px}.member-row{display:grid;grid-template-columns:1fr 78px auto;gap:9px;align-items:center;margin:8px 0}.member-row input[type=text]{width:100%;border:1px solid #bdcddd;border-radius:9px;padding:10px;min-width:0}.member-row input[type=color]{width:70px;height:43px;border:1px solid #bdcddd;border-radius:8px;background:white;padding:3px}.empty-state{padding:25px;text-align:center;color:#63788a}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#183852;color:white;padding:12px 19px;border-radius:12px;box-shadow:0 6px 25px #0003;z-index:10;max-width:90vw;display:none}dialog{border:0;border-radius:18px;padding:0;box-shadow:0 20px 70px #17304755;width:min(470px,calc(100vw - 24px))}dialog::backdrop{background:#172f48a6}.dialog-body{padding:20px}.dialog-body h2{margin:0 0 14px;font-size:1.2rem}textarea{width:100%;min-height:120px;border:1px solid #bdcddd;border-radius:9px;padding:10px;resize:vertical}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}input:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid #75a7ff;outline-offset:2px}@media(max-width:650px){.shell{padding:13px 11px 40px}h1{font-size:1.45rem}.card{padding:13px}.member-row{grid-template-columns:1fr 62px auto}.member-row input[type=color]{width:59px}}@media print{body{background:white}.tabs,.topbar,.actions,.day-controls,.hint,#settings,.toast{display:none!important}.shell{max-width:none;padding:0}.card{box-shadow:none;border:0;padding:0}.calendar-scroll{overflow:visible}.calendar{min-width:0}.day{break-inside:avoid}.month{break-inside:avoid;page-break-inside:avoid}}
+
+/* V2 compact calendar */
+.shell{max-width:1420px}.topbar{padding:12px 15px;align-items:center}.label{margin-bottom:4px}.people{gap:5px}.person{padding:7px 10px;min-height:39px}.mode{padding:7px 10px;min-height:39px}.utility{display:flex;gap:9px;align-items:center;margin:0 0 10px}.utility .btn{min-height:38px;padding:6px 10px}.more{position:relative}.more summary{cursor:pointer;list-style:none;border:1px solid #cbd9e8;background:white;border-radius:10px;color:#1c466f;padding:8px 12px;font-weight:750}.more summary::-webkit-details-marker{display:none}.more-content{position:absolute;left:0;top:calc(100% + 4px);z-index:5;background:white;border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 28px #19304433;display:flex;flex-wrap:wrap;gap:6px;padding:9px;min-width:250px}#summary{display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:11px 15px;margin-bottom:13px}#summary strong{color:#234e89}#summary span{color:#607488;font-size:.88rem}.month{padding:13px;margin-bottom:12px}.month h2{font-size:1.13rem;margin-bottom:9px}.calendar{min-width:735px;gap:5px}.weekday{padding:3px}.day{padding:6px;min-height:133px;border-radius:10px}.day-head{margin-bottom:5px}.date{font-size:.98rem}.tiny{min-height:26px;font-size:.85rem;padding:2px 6px}.slot{border:1px solid #e1e8f0;background:#f8fafc;border-radius:8px;margin:4px 0;padding:3px;min-height:45px}.slot-main{border:0;background:transparent;color:#40576b;display:flex;justify-content:space-between;align-items:center;width:100%;min-height:24px;padding:1px 3px;text-align:left;font-size:.75rem;cursor:pointer}.slot-main.mine-yes{color:#149253}.slot-main.mine-no{color:#d04b45}.marks{display:flex;gap:3px;flex-wrap:wrap;padding:1px 2px;min-height:22px}.mark-chip{font-weight:950;font-size:.89rem;line-height:20px;min-width:20px;height:21px;text-align:center;border-radius:6px;border:1px solid var(--c);padding:0 2px;cursor:help}.mark-chip.yes{color:var(--c);background:#fff}.mark-chip.no{color:white;background:var(--c)}.mark-chip.current{outline:2px solid #233b52;outline-offset:1px}.floating-tip{position:fixed;z-index:30;background:#1e3347;color:white;border-radius:8px;padding:7px 10px;box-shadow:0 5px 18px #0004;pointer-events:none;opacity:0;transform:translate(-50%,-100%);white-space:nowrap;max-width:90vw;transition:opacity .1s}.floating-tip.visible{opacity:1}@media print{.utility,.floating-tip{display:none!important}#summary{border:0}}
+
+/* V3 weekends, pending status and full-area half-day hit targets */
+.weekday.sat{color:#25649b;background:#eaf4fd;border-radius:7px}.weekday.sun{color:#b15365;background:#fff0f2;border-radius:7px}
+.day.saturday{background:#eef7ff;border-color:#bdd9ed}.day.sunday{background:#fff1f3;border-color:#efc8cf}
+.day.saturday .date{color:#2a699c}.day.sunday .date{color:#b04d62}
+.day.saturday .slot{background:#f8fcff;border-color:#caddeb}.day.sunday .slot{background:#fff9fa;border-color:#eed6dc}
+.slot{position:relative;min-height:72px;padding:0;overflow:visible}.slot-main{position:absolute;inset:0;width:100%;height:100%;padding:6px;align-items:flex-start;z-index:1;border-radius:8px}.slot-main:focus-visible{z-index:3}.slot-main.mine-pending{color:#93620c}
+.marks{position:relative;z-index:2;padding:31px 5px 5px;min-height:71px;pointer-events:none;align-content:start}.mark-chip{pointer-events:auto;cursor:help}.mark-chip.pending{color:#7f570d;background:#fff3d5;border-color:#d5a43f}
+@media print{.day.saturday,.day.sunday,.weekday.sat,.weekday.sun{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+
+/* V4: simple square marks, no nested borders */
+.day{border:0;box-shadow:none}.day.saturday,.day.sunday{border:0}
+.slot,.day.saturday .slot,.day.sunday .slot{border:0;border-radius:0;background:transparent;margin:2px 0;padding:0;min-height:69px}
+.slot-main{border:0;border-radius:0;background:transparent}.slot-main:hover{background:#edf3f9}
+.day.saturday .slot-main:hover{background:#e3f1fb}.day.sunday .slot-main:hover{background:#ffe7ec}
+.marks{min-height:68px;padding:29px 5px 5px;gap:4px}
+.mark-chip,.mark-chip.yes,.mark-chip.no,.mark-chip.pending{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;min-width:26px;line-height:1;padding:0;border:0;border-radius:0;background:var(--c);color:#fff;font-size:1rem;font-weight:900;box-shadow:none;outline:none}
+.mark-chip.current{outline:none;box-shadow:none}
+.mark-chip:hover,.mark-chip:focus-visible{filter:brightness(.83)}
+
+/* V5 dark terminal-inspired palette: distinct weekday and weekend date cells */
+:root{color-scheme:dark;--blue:#f5a524;--line:#334758;color:#e8f1f5;background:#080f16}
+body{background:#080f16;color:#e8f1f5}
+header h1{color:#f2f7fa}header .badge{background:#342719;color:#ffc45d}
+.tabs{border-bottom-color:#226477}.tabs button{color:#9db1be}.tabs button.active{color:#ffc15a;border-color:#f5a524}
+.card{background:#101b25;border-color:#284251;box-shadow:none}
+.label,.month h2,.field label{color:#b9ccd6}.hint{color:#a2b8c5}
+.person,.mode,.btn,.more summary{background:#182a38;color:#e0edf3;border-color:#3d6070}
+.person.active,.mode.active{background:#263321;color:#ffca69;border-color:#f5a524;box-shadow:none}
+.btn.primary{background:#a7660a;color:#fff;border-color:#d58a1d}.btn.danger{color:#ff9b9b}
+.person:hover,.mode:hover,.btn:hover,.more summary:hover{border-color:#50a9bd}
+#summary{background:#11212b;border-color:#2e5361}#summary strong{color:#ffc36b}#summary span{color:#bed0d9}
+.month{background:#101b25;border-color:#315160}.calendar{gap:7px}
+.weekday{color:#c2d4dc}.weekday.sat{color:#91d1f5;background:#173349}.weekday.sun{color:#ffb1c0;background:#3a2531}
+.day,.day.saturday,.day.sunday{border:1px solid #395366;box-shadow:none}
+.day{background:#1b2a36}.day.saturday{background:#16374b;border-color:#347392}.day.sunday{background:#3b2732;border-color:#80505e}
+.day.empty{background:#0c1720;border:1px dashed #223646}
+.day .date{color:#eef4f6}.day.saturday .date{color:#9ed9ff}.day.sunday .date{color:#ffc0cd}.date.today{color:#ffc36b}
+.day .tiny{background:#293e4c;color:#d8ebf3}.day.saturday .tiny{background:#24506a}.day.sunday .tiny{background:#5b3542}
+.slot,.day.saturday .slot,.day.sunday .slot{background:transparent;border:0}
+.slot-main{color:#c4d4dd}.slot-main.mine-yes{color:#83e8a4}.slot-main.mine-no{color:#ff9b9b}.slot-main.mine-pending{color:#ffcf73}
+.slot-main:hover{background:#284150}.day.saturday .slot-main:hover{background:#245571}.day.sunday .slot-main:hover{background:#633746}
+.mark-chip,.mark-chip.yes,.mark-chip.no,.mark-chip.pending{background:var(--c);color:#fff;border:0;border-radius:0}
+.more-content{background:#142531;border-color:#3d6070}
+.field input,.member-row input[type=text],.member-row input[type=color],textarea{background:#142632;color:#e7f3f8;border-color:#476879}
+input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1)}
+dialog{background:#162733;color:#e9f3f7}dialog::backdrop{background:#000b}
+.floating-tip,.toast{background:#f5a524;color:#181d22;font-weight:700}
+:focus-visible{outline-color:#f6bb59}
+@media print{html,:root,body{color-scheme:light;background:#fff;color:#111}.card,.month,.day,.day.saturday,.day.sunday{background:white!important;color:#111!important;border-color:#777!important}.weekday,.day .date,.slot-main,#summary strong,#summary span{color:#111!important}.mark-chip{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+
+/* V6: invert only the half-day slots where every member marked O */
+.slot.intersection{background:#1b2a36!important;filter:invert(1);box-shadow:0 0 0 2px #152536 inset}
+.day.saturday .slot.intersection{background:#16374b!important}
+.day.sunday .slot.intersection{background:#3b2732!important}
+.slot.intersection .slot-main{color:#e8f1f5!important}
+.slot.intersection .slot-main:hover{background:transparent}
+#intersectionToggle[aria-pressed="true"]{background:#f5a524;color:#171c20;border-color:#ffc36b}
+@media print{.slot.intersection{filter:none;background:transparent!important;box-shadow:none}}
+
+/* V7 fixed single-row toolbar and a two-axis calendar viewport */
+html,body{height:100%;overflow:hidden}
+.shell{height:100vh;height:100dvh;max-width:none;width:100%;padding:0;display:flex;flex-direction:column;overflow:hidden}
+.workspace-toolbar{position:relative;z-index:20;flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:8px 12px;padding-top:max(8px,env(safe-area-inset-top));background:#0b1720;border-bottom:1px solid #387183;box-shadow:0 4px 14px #0005;min-width:0}
+.brand{white-space:nowrap;font-size:1rem;font-weight:900;color:#f1f7fa;flex:none}.brand .badge{font-size:.7rem;padding:4px 6px}
+.workspace-toolbar .people{display:flex;flex:1 1 auto;min-width:90px;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;gap:5px;padding:3px;overscroll-behavior-x:contain}
+.workspace-toolbar .person{flex:none;white-space:nowrap;min-height:42px;padding:7px 10px}
+.workspace-toolbar .modes{display:flex;flex:none;gap:4px}.workspace-toolbar .mode{width:43px;height:43px;min-height:43px;padding:0;font-size:1.16rem}
+.workspace-toolbar .btn,.workspace-toolbar .more summary{height:43px;min-height:43px;padding:7px 9px;white-space:nowrap}
+.workspace-toolbar #undo{font-size:1.4rem;min-width:42px}.workspace-toolbar .more summary{font-size:1.4rem;min-width:42px;text-align:center;padding:4px 8px}
+.workspace-toolbar .more-content{right:0;left:auto;max-width:min(320px,90vw)}
+#calendar.panel.active{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;padding:10px 12px 0}
+#settings.panel.active{display:block;flex:1;min-height:0;overflow:auto;padding:14px;overscroll-behavior:contain}
+#summary{flex:none;margin:0 0 9px;padding:9px 12px}
+.calendar-viewport{flex:1;min-height:0;min-width:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable;background:#0d1922;border:1px solid #2e5364;border-radius:12px}
+.calendar-weekdays{position:sticky;top:0;z-index:12;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;min-width:760px;padding:7px 13px;background:#142735;border-bottom:2px solid #498395;box-shadow:0 4px 9px #0007}
+.calendar-weekdays .weekday{padding:7px 2px;font-size:.92rem}
+#months{min-width:760px;padding:0 0 10px}.calendar-scroll{overflow:visible}.calendar{min-width:0;gap:7px}
+.month{margin:9px 0 12px;padding:13px}.month h2{margin:0 0 9px}
+@media(max-width:850px){.workspace-toolbar{gap:5px;padding-left:7px;padding-right:7px}.brand{font-size:.87rem}.brand .badge{display:none}.workspace-toolbar .person{padding:6px 8px}.workspace-toolbar .mode{width:39px;height:42px}.workspace-toolbar #intersectionToggle{max-width:75px;white-space:normal;line-height:1.05;font-size:.79rem}.workspace-toolbar #viewToggle{padding:5px 7px}#summary span{display:none}}
+@media(max-width:600px){.brand{display:none}.workspace-toolbar .people{min-width:76px}.workspace-toolbar .mode{width:35px}.workspace-toolbar #undo,.workspace-toolbar .more summary{min-width:36px;padding:4px}.workspace-toolbar #intersectionToggle{max-width:56px;font-size:.72rem}.workspace-toolbar #viewToggle{font-size:.78rem}.calendar-viewport{border-radius:0}#calendar.panel.active{padding:5px 0 0}#summary{margin:0 5px 5px}}
+@media print{html,body,.shell{height:auto;overflow:visible}.workspace-toolbar{display:none!important}#calendar.panel.active{display:block;overflow:visible;padding:0}.calendar-viewport{overflow:visible;border:0}.calendar-weekdays{position:static;box-shadow:none;min-width:0}#months{min-width:0}.calendar{min-width:0}}
+
+/* V8 destructive action */
+.workspace-toolbar .clear-all{color:#ffb8b8;border-color:#a04b54;background:#3d242b}
+.workspace-toolbar .clear-all:hover{background:#67303a;border-color:#e7767e}
+@media(max-width:600px){.workspace-toolbar .clear-all{padding:4px 6px;font-size:.78rem}}
+</style>
+</head>
+<body><div class="shell">
+<div class="workspace-toolbar" role="toolbar" aria-label="會議排程工具列">
+  <div class="brand">約開會小工具 <span class="badge">v8.0</span></div>
+  <div id="people" class="people" aria-label="選擇委員"></div>
+  <div class="modes" id="modes" aria-label="選擇標記">
+    <button class="mode active" data-mode="yes" title="O 可以" aria-label="O 可以">O</button>
+    <button class="mode" data-mode="no" title="X 不行" aria-label="X 不行">X</button>
+    <button class="mode" data-mode="pending" title="? 待確認" aria-label="? 待確認">?</button>
+  </div>
+  <button class="btn tool-btn" id="undo" title="復原上一步" aria-label="復原上一步">↶</button>
+  <button class="btn tool-btn clear-all" id="clearAll" type="button" title="清除目前日期區間所有委員的標記與備註">清除</button>
+  <button class="btn tool-btn" id="intersectionToggle" type="button" aria-pressed="false">顯示交集</button>
+  <details class="more"><summary title="匯出與備份">⋯</summary><div class="more-content"><button class="btn" id="csv">匯出 CSV</button><button class="btn" id="json">備份 JSON</button><button class="btn" id="importBtn">匯入備份</button><input id="importFile" type="file" accept="application/json,.json" hidden><button class="btn" id="print">列印</button></div></details>
+  <button class="btn tool-btn" id="viewToggle" type="button">設定</button>
+</div>
+<section id="calendar" class="panel active">
+<div class="card" id="summary"></div>
+<div id="calendarViewport" class="calendar-viewport" tabindex="0" aria-label="行事曆，可上下或左右捲動">
+<div class="calendar-weekdays"><div class="weekday ">週一</div><div class="weekday ">週二</div><div class="weekday ">週三</div><div class="weekday ">週四</div><div class="weekday ">週五</div><div class="weekday sat">週六</div><div class="weekday sun">週日</div></div>
+<div id="months"></div>
+</div>
+</section>
+<section id="settings" class="panel"><div class="card"><h2>日期區間</h2><div class="form-row"><div class="field"><label for="start">開始日期</label><input id="start" type="date"></div><div class="field"><label for="end">結束日期</label><input id="end" type="date"></div></div><p class="hint">可設定最多 366 天；儲存後行事曆只顯示此區間。</p></div><div class="card"><h2>開會委員</h2><p class="hint">可增加委員並修改姓名與顏色。刪除委員會同時刪除他的時段與備註。</p><div id="memberEditor"></div><div class="actions" style="margin-top:12px"><button class="btn" id="addMember">＋ 新增委員</button><button class="btn primary" id="saveSettings">儲存設定</button></div></div><div class="card"><h2>資料說明</h2><p>資料自動儲存在此瀏覽器。從 V1 或 V2 移轉可先匯出 JSON，再於 V8 匯入；換裝置前也請先備份。此檔案不會連線或寄送資料。</p></div></section>
+</div><div class="toast" id="toast" role="status"></div>
+<dialog id="noteDialog"><div class="dialog-body"><h2 id="noteTitle">備註</h2><label for="noteText">該委員這一天的備註</label><textarea id="noteText" placeholder="例如：上午另有會議、需再確認時間"></textarea><div class="dialog-actions"><button class="btn" id="cancelNote">取消</button><button class="btn primary" id="saveNote">儲存備註</button></div></div></dialog>
+<script>
+(()=>{'use strict';
+const KEY='meeting-easy-v1',colors=['#2b65c8','#d75646','#189a78','#ad64bd','#de961f','#5879a3','#b74677','#538942'];
+const $=s=>document.querySelector(s);let state,selected='',mode='yes',undo=null,noteTarget=null,showIntersections=false;
+const iso=d=>{let y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),a=String(d.getDate()).padStart(2,'0');return `${y}-${m}-${a}`};
+const date=s=>{let [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const today=iso(new Date());const plus=(s,n)=>{let d=date(s);d.setDate(d.getDate()+n);return iso(d)};
+const validDate=s=>typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s)&&iso(date(s))===s;
+const daysBetween=(a,b)=>Math.round((date(b)-date(a))/86400000);
+const fresh=()=>({start:today,end:plus(today,27),members:[{id:'m1',name:'委員 1',color:colors[0]},{id:'m2',name:'委員 2',color:colors[1]},{id:'m3',name:'委員 3',color:colors[2]}],marks:{},notes:{}});
+function clean(raw){if(!raw||!validDate(raw.start)||!validDate(raw.end)||daysBetween(raw.start,raw.end)<0||daysBetween(raw.start,raw.end)>365||!Array.isArray(raw.members)||!raw.members.length||raw.members.length>50)throw Error('備份的日期或委員資料不正確');let ids=new Set();let members=raw.members.map((m,i)=>{if(!m||typeof m.id!=='string'||!/^[a-zA-Z0-9_-]{1,60}$/.test(m.id)||ids.has(m.id))throw Error('委員識別資料不正確');ids.add(m.id);return{id:m.id,name:String(m.name||`委員 ${i+1}`).slice(0,50),color:/^#[0-9a-fA-F]{6}$/.test(m.color)?m.color:colors[i%colors.length]}});let marks={},notes={};for(let [k,v] of Object.entries(raw.marks||{})){let [id,day,half]=k.split('|');if(ids.has(id)&&validDate(day)&&['am','pm'].includes(half)&&['yes','no','pending'].includes(v))marks[k]=v}for(let [k,v] of Object.entries(raw.notes||{})){let [id,day]=k.split('|');if(ids.has(id)&&validDate(day)&&typeof v==='string')notes[k]=v.slice(0,1000)}return{start:raw.start,end:raw.end,members,marks,notes}}
+try{state=clean(JSON.parse(localStorage.getItem(KEY)))}catch{state=fresh()}
+selected=state.members[0].id;
+function toast(s){let el=$('#toast');el.textContent=s;el.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.style.display='none',3200)}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{toast('儲存失敗：儲存空間可能已滿，請立即匯出 JSON 備份')}}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const member=()=>state.members.find(m=>m.id===selected)||state.members[0];const key=(id,day,half)=>`${id}|${day}|${half}`;
+function renderPeople(){let p=$('#people');p.innerHTML='';for(let m of state.members){let b=document.createElement('button');b.className='person'+(m.id===selected?' active':'');b.innerHTML=`<span class="swatch" style="--c:${m.color}"></span>${esc(m.name)}`;b.onclick=()=>{selected=m.id;renderCalendar()};p.append(b)}document.querySelectorAll('.mode').forEach(b=>b.classList.toggle('active',b.dataset.mode===mode))}
+function slot(day,half){let val=state.marks[key(selected,day,half)],chips='';for(let m of state.members){let v=state.marks[key(m.id,day,half)];if(v){let title=`${m.name}：${v==='yes'?'可以':v==='no'?'不行':'待確認'}`;chips+=`<button type="button" class="mark-chip ${v} ${m.id===selected?'current':''}" style="--c:${m.color}" data-mark-id="${m.id}" data-day="${day}" data-half="${half}" data-tip="${esc(title)}" title="${esc(title)}" aria-label="${esc(title)}">${v==='yes'?'O':v==='no'?'X':'?'}</button>`}}let isIntersection=state.members.every(m=>state.marks[key(m.id,day,half)]==='yes');return `<div class="slot ${showIntersections&&isIntersection?'intersection':''}"><button type="button" class="slot-main ${val==='yes'?'mine-yes':val==='no'?'mine-no':val==='pending'?'mine-pending':''}" data-day="${day}" data-half="${half}" aria-label="${day} ${half==='am'?'上午':'下午'}，${esc(member().name)}${val==='yes'?'可以':val==='no'?'不行':val==='pending'?'待確認':'尚未詢問'}"><span>${half==='am'?'上午':'下午'}</span></button><div class="marks">${chips}</div></div>`}
+function renderSummary(){let all=0,best=[];for(let d=state.start;d<=state.end;d=plus(d,1)){for(let h of ['am','pm']){let yes=state.members.filter(m=>state.marks[key(m.id,d,h)]==='yes').length,no=state.members.filter(m=>state.marks[key(m.id,d,h)]==='no').length;if(yes===state.members.length)all++;if(yes&&!no)best.push({d,h,yes})}}best.sort((a,b)=>b.yes-a.yes||a.d.localeCompare(b.d)||a.h.localeCompare(b.h));let top=best.slice(0,3).map(x=>`${x.d} ${x.h==='am'?'上午':'下午'}（${x.yes}/${state.members.length}）`).join('、');$('#summary').innerHTML=`<strong>全員可約 ${all} 個半天</strong><span>優先確認：${top||'尚無候選時段'}</span>`}
+function renderCalendar(){hideTip();$('#intersectionToggle').textContent=showIntersections?'恢復':'顯示交集';$('#intersectionToggle').setAttribute('aria-pressed',String(showIntersections));renderPeople();renderSummary();let out='',cursor=state.start,end=state.end;while(cursor<=end){let first=date(cursor),year=first.getFullYear(),month=first.getMonth();let days=[];let offset=(first.getDay()+6)%7;for(let i=0;i<offset;i++)days.push('<div class="day empty"></div>');while(cursor<=end&&date(cursor).getMonth()===month&&date(cursor).getFullYear()===year){let d=cursor,ds=date(d),wd=ds.getDay(),n=(state.notes[key(selected,d,'')]||'').length;days.push(`<div class="day ${wd===6?'saturday':wd===0?'sunday':''}"><div class="day-head"><span class="date ${d===today?'today':''}">${ds.getDate()} <small>${wd===0?'日':wd===6?'六':''}</small></span><span class="day-controls"><button class="tiny" data-day-no="${d}" title="將此委員整天標為不行" aria-label="整天不行">✕</button><button class="tiny" data-note="${d}" title="編輯當日備註" aria-label="編輯備註">${n?'▣':'▤'}</button></span></div>${slot(d,'am')}${slot(d,'pm')}</div>`);cursor=plus(cursor,1)}out+=`<div class="card month"><h2>${year} 年 ${month+1} 月</h2><div class="calendar-scroll"><div class="calendar">${days.join('')}</div></div></div>`}$('#months').innerHTML=out||'<div class="empty-state">請至設定頁籤指定日期。</div>';$('#undo').disabled=!undo}
+function snapshot(){undo=JSON.stringify(state)}
+function clearMark(id,day,half){let k=key(id,day,half);if(!state.marks[k])return;snapshot();delete state.marks[k];save();renderCalendar()}
+function clearVisible(){let marks=Object.keys(state.marks).filter(k=>{let day=k.split('|')[1];return day>=state.start&&day<=state.end}),notes=Object.keys(state.notes).filter(k=>{let day=k.split('|')[1];return day>=state.start&&day<=state.end});if(!marks.length&&!notes.length){toast('目前日期區間沒有註記可清除');return}if(!confirm(`確定清除 ${state.start}～${state.end} 所有委員的 ${marks.length} 筆標記及 ${notes.length} 筆備註？清除後可按「復原」還原。`))return;snapshot();for(let k of marks)delete state.marks[k];for(let k of notes)delete state.notes[k];save();renderCalendar();toast('已清除目前日期區間的所有註記')}
+function mark(day,half,value){snapshot();let k=key(selected,day,half);if(value==='clear')delete state.marks[k];else state.marks[k]=value;save();renderCalendar()}
+function markDayNo(day){snapshot();state.marks[key(selected,day,'am')]='no';state.marks[key(selected,day,'pm')]='no';save();renderCalendar();toast(`${member().name}：${day} 全天不行`)}
+function renderEditor(){let e=$('#memberEditor');e.innerHTML='';state.members.forEach((m,i)=>{let row=document.createElement('div');row.className='member-row';row.dataset.id=m.id;row.innerHTML=`<input type="text" maxlength="50" aria-label="第 ${i+1} 位委員姓名" value="${esc(m.name)}"><input type="color" aria-label="第 ${i+1} 位委員顏色" value="${m.color}"><button class="btn danger remove" type="button" title="刪除委員">刪除</button>`;e.append(row)})}
+function settings(){ $('#start').value=state.start;$('#end').value=state.end;renderEditor()}
+function saveSettings(){let start=$('#start').value,end=$('#end').value;if(!validDate(start)||!validDate(end)||daysBetween(start,end)<0||daysBetween(start,end)>365){toast('請設定正確日期，區間最多 366 天');return}let rows=[...document.querySelectorAll('.member-row')];if(!rows.length){toast('至少需要一位委員');return}if(rows.length>50){toast('最多 50 位委員');return}let members=rows.map((r,i)=>({id:r.dataset.id,name:r.querySelector('input[type=text]').value.trim()||`委員 ${i+1}`,color:r.querySelector('input[type=color]').value}));let oldIds=new Set(members.map(m=>m.id));snapshot();state.start=start;state.end=end;state.members=members;for(let k of Object.keys(state.marks))if(!oldIds.has(k.split('|')[0]))delete state.marks[k];for(let k of Object.keys(state.notes))if(!oldIds.has(k.split('|')[0]))delete state.notes[k];if(!oldIds.has(selected))selected=members[0].id;save();renderCalendar();switchTab('calendar');toast('設定已儲存')}
+function switchTab(name){document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===name));$('#viewToggle').textContent=name==='settings'?'行事曆':'設定';if(name==='settings')settings()}
+function download(content,name,type){let blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
+function csv(){let rows=[['日期','星期','時段','委員','狀態','當日備註']];for(let d=state.start;d<=state.end;d=plus(d,1))for(let h of ['am','pm'])for(let m of state.members){let v=state.marks[key(m.id,d,h)];rows.push([d,'日一二三四五六'[date(d).getDay()],h==='am'?'上午':'下午',m.name,v==='yes'?'可以':v==='no'?'不行':v==='pending'?'待確認':'尚未詢問',state.notes[key(m.id,d,'')]||''])}let q=s=>'"'+String(s).replaceAll('"','""')+'"';download('\ufeff'+rows.map(r=>r.map(q).join(',')).join('\r\n'),`約開會小工具_時段表_${state.start}_${state.end}.csv`,'text/csv;charset=utf-8')}
+const dialog=$('#noteDialog');
+const tip=document.createElement('div');tip.className='floating-tip';tip.setAttribute('role','tooltip');document.body.append(tip);let tipTimer;
+function showTip(el,ms=0){clearTimeout(tipTimer);tip.textContent=el.dataset.tip||'';let r=el.getBoundingClientRect();tip.style.left=Math.max(8,Math.min(window.innerWidth-8,r.left+r.width/2))+'px';tip.style.top=Math.max(8,r.top-8)+'px';tip.classList.add('visible');if(ms)tipTimer=setTimeout(hideTip,ms)}
+function hideTip(){tip.classList.remove('visible')}
+$('#months').addEventListener('pointerover',e=>{let b=e.target.closest('.mark-chip');if(b&&e.pointerType!=='touch')showTip(b)});
+$('#months').addEventListener('pointerout',e=>{if(e.target.closest('.mark-chip'))hideTip()});
+$('#months').addEventListener('focusin',e=>{let b=e.target.closest('.mark-chip');if(b)showTip(b)});
+$('#months').addEventListener('focusout',e=>{if(e.target.closest('.mark-chip'))hideTip()});
+$('#months').addEventListener('click',e=>{let b=e.target.closest('button');if(!b)return;if(b.classList.contains('mark-chip')){clearMark(b.dataset.markId,b.dataset.day,b.dataset.half)}else if(b.dataset.half){mark(b.dataset.day,b.dataset.half,mode)}else if(b.dataset.dayNo){markDayNo(b.dataset.dayNo)}else if(b.dataset.note){noteTarget={id:selected,day:b.dataset.note};$('#noteTitle').textContent=`${member().name}｜${noteTarget.day} 備註`;$('#noteText').value=state.notes[key(selected,noteTarget.day,'')]||'';dialog.showModal();$('#noteText').focus()}});
+$('#modes').addEventListener('click',e=>{let b=e.target.closest('[data-mode]');if(b){mode=b.dataset.mode;renderPeople()}});
+$('#viewToggle').onclick=()=>switchTab($('#settings').classList.contains('active')?'calendar':'settings');
+$('#addMember').onclick=()=>{let rows=[...document.querySelectorAll('.member-row')];if(rows.length>=50){toast('最多 50 位委員');return}let id='m'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);let row=document.createElement('div');row.className='member-row';row.dataset.id=id;row.innerHTML=`<input type="text" maxlength="50" aria-label="新增委員姓名" value="委員 ${rows.length+1}"><input type="color" aria-label="新增委員顏色" value="${colors[rows.length%colors.length]}"><button class="btn danger remove" type="button">刪除</button>`;$('#memberEditor').append(row);row.querySelector('input[type=text]').select()};
+$('#memberEditor').onclick=e=>{if(!e.target.closest('.remove'))return;if(document.querySelectorAll('.member-row').length===1){toast('至少保留一位委員');return}if(confirm('確定刪除這位委員？儲存設定後，其時段與備註也會刪除。'))e.target.closest('.member-row').remove()};
+$('#clearAll').onclick=clearVisible;$('#saveSettings').onclick=saveSettings;$('#intersectionToggle').onclick=()=>{showIntersections=!showIntersections;renderCalendar()};$('#undo').onclick=()=>{if(!undo)return;let prior=JSON.stringify(state);state=clean(JSON.parse(undo));undo=prior;if(!state.members.some(m=>m.id===selected))selected=state.members[0].id;save();renderCalendar();toast('已復原；可再按一次重做')};
+$('#csv').onclick=csv;$('#json').onclick=()=>download(JSON.stringify({app:'約開會小工具',version:'8.0',exportedAt:new Date().toISOString(),...state},null,2),`約開會小工具_備份_${iso(new Date())}.json`,'application/json;charset=utf-8');$('#importBtn').onclick=()=>$('#importFile').click();$('#importFile').onchange=async e=>{let file=e.target.files[0];e.target.value='';if(!file)return;try{if(file.size>5e6)throw Error('檔案過大');let loaded=clean(JSON.parse(await file.text()));if(!confirm('匯入備份會取代目前所有設定與紀錄，確定繼續？'))return;snapshot();state=loaded;selected=state.members[0].id;save();renderCalendar();toast('備份已匯入')}catch(err){toast('匯入失敗：'+err.message)}};
+$('#print').onclick=()=>window.print();$('#cancelNote').onclick=()=>dialog.close();$('#saveNote').onclick=()=>{if(!noteTarget)return;snapshot();let k=key(noteTarget.id,noteTarget.day,'');let value=$('#noteText').value.trim().slice(0,1000);if(value)state.notes[k]=value;else delete state.notes[k];save();dialog.close();renderCalendar();toast('備註已儲存')};
+renderCalendar();
+})();
+</script></body></html>
